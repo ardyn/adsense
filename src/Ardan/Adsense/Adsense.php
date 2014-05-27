@@ -90,7 +90,7 @@ class Adsense {
    */
   public function get($name) {
 
-    if ( ! $this->enabled )
+    if ( ! $this->showAds() )
       return '';
 
     $this->ad->load($name, $this->config->get("ardan/adsense::ads.$name"));
@@ -113,6 +113,21 @@ class Adsense {
     return View::make("ardan/adsense::{$this->renderer}", $data);
 
   } /* function get */
+
+
+
+  /**
+   * Whether to show ads
+   *
+   * @access protected
+   * @param void
+   * @return boolean
+   */
+  protected function showAds() {
+
+    return $this->enabled;
+
+  } /* function showAds */
 
 } /* class Adsense */
 
