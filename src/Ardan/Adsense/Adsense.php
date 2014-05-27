@@ -70,7 +70,7 @@ class Adsense {
     $this->ad = $ad;
     $this->renderer = $config->get('ardan/adsense::renderer');
     $this->enabled = $config->get('ardan/adsense::enabled');
-    $this->ad_client = $config->get('ardan/adsense::ad_client');
+    $this->ad_client = "ca-".$config->get('ardan/adsense::ad_client');
     $this->ad_limits = $config->get('ardan/adsense::limits');
     $this->ad_count = [
       Ad::LINK => 0,
