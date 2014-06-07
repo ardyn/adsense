@@ -32,7 +32,7 @@ class Adsense {
   /**
    * Ads enabled
    *
-   * @var boolean
+   * @var \Closure|boolean
    */
   protected $enabled;
 
@@ -103,11 +103,12 @@ class Adsense {
    *
    * @access public
    * @param string $name
+   * @param array [$arguments] Arguments for enabled closure.
    * @return string
    */
-  public function get($name) {
+  public function get($name, array $arguments=[]) {
 
-    if ( ! $this->showAds() )
+    if ( ! $this->showAds($arguments) )
       return '';
 
     $this->ad->load($name, $this->config->get("ardan/adsense::ads.$name"));
@@ -135,10 +136,13 @@ class Adsense {
    * Whether to show ads
    *
    * @access protected
-   * @param void
+   * @param mixed $arguments
    * @return boolean
    */
-  protected function showAds() {
+  protected function showAds($arguments) {
+
+    if ( is_callable($this->enabled) )
+      return call_user_func_array($this->enabled, $arguments);
 
     return $this->enabled;
 

@@ -10,7 +10,8 @@ return [
   'ad_client' => '',
 
   /**
-   * Set to true to display ads.
+   * Set to true to display ads. Can either be boolean or a Closure that returns
+   * a boolean value.
    */
   'enabled' => true,
 

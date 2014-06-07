@@ -66,6 +66,10 @@ And add the alias in `aliases` array:
 
 To display the HTML for an ad, call `Adsense::get('ad_key');` where `'ad_key'` is the array index of your ad.
 
+Determine whether ads are displayed by setting the `enabled` configuration value to either a boolean value or
+a closure that returns a boolean value. The closure may include parameters. Pass the arguments
+in `Adsense::get('ad_key', [ /* parameters */ ])`.
+
 ## Extending Blade
 
 You may create a blade control structure to display an ad with `@adsense('ad_key')` rather than `{{ Adsense::get('ad_key') }}`.
