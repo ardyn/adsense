@@ -1,11 +1,11 @@
 <?php
 
-use Ardan\Adsense\Models\Ad;
+use Ardan\Adsense\Ad;
 
 return [
 
   /**
-   * AdSense ID
+   * AdSense ID from Google, aka publisher ID
    */
   'ad_client' => '',
 
@@ -15,7 +15,8 @@ return [
   'enabled' => true,
 
   /**
-   * Renderer. You may choose how the ads are displayed.
+   * Renderer. You may choose how the ads are displayed. Publish this packages
+   * view files to override these renderers or to create your own renderers.
    *
    * Available options: 'placeholdit', 'asynchronous', 'synchronous'
    */
@@ -39,7 +40,7 @@ return [
    */
   'defaults' => [
     'type' => Ad::CONTENT,
-    'description' => 'A Google Ad',
+    'description' => 'A Google Ad', # Comments only, doesn't do anything.
   ],
 
   /**
@@ -47,7 +48,7 @@ return [
    *
    * 'id'          The Ad ID from Google AdSense
    *
-   * 'size'        May be an array [ width, height ], a string '100x200',
+   * 'size'        May be an array [ width, height ], a string '200x100',
    *               or Ad::RESPONSIVE for responsive ads
    *
    * 'type'        Can either be Ad::LINK or Ad::CONTENT
@@ -55,11 +56,11 @@ return [
    * 'description' Optional and added as an HTML comment with the ad.
    */
   'ads' => [
-    'test' => [
-      'id' => '',
-      'size' => [300, 100],
+    'example' => [
+      'id' => '0123456789',
+      'size' => Ad::RESPONSIVE,
       'type' => Ad::CONTENT,
-      'description' => 'Test Ad',
+      'description' => 'Example Ad',
     ],
   ],
 ];

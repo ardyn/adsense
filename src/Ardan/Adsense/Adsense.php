@@ -2,9 +2,8 @@
 
 namespace Ardan\Adsense;
 
-use Ardan\Adsense\Models\Ad;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\View;
+use Ardan\Adsense\Ad;
+use Illuminate\View\Environment as View;
 use Illuminate\Config\Repository as Config;
 
 class Adsense {
@@ -42,14 +41,28 @@ class Adsense {
    *
    * @var string
    */
-  protected $ad_client;
+  protected $adClient;
+
+  /**
+   * View
+   *
+   * @var \Illuminate\View\Environment
+   */
+  protected $view;
+
+  /**
+   * Ad limits
+   *
+   * @var array
+   */
+  protected $adLimits;
 
   /**
    * Ad Counter
    *
    * @var array
    */
-  protected $ad_count;
+  protected $adCount;
 
 
 
@@ -59,20 +72,24 @@ class Adsense {
    * @access public
    * @param \Illuminate\Config\Repository $config
    * @param \Ardan\Adsense\Models\Ad $ad
+   * @param \Illuminate\View\Environment $view
    * @return void
    */
   public function __construct(
     Config $config,
-    Ad $ad
+    Ad $ad,
+    View $view
   ) {
 
     $this->config = $config;
     $this->ad = $ad;
+    $this->view = $view;
+
     $this->renderer = $config->get('ardan/adsense::renderer');
     $this->enabled = $config->get('ardan/adsense::enabled');
-    $this->ad_client = "ca-".$config->get('ardan/adsense::ad_client');
-    $this->ad_limits = $config->get('ardan/adsense::limits');
-    $this->ad_count = [
+    $this->adClient = "ca-".$config->get('ardan/adsense::ad_client');
+    $this->adLimits = $config->get('ardan/adsense::limits');
+    $this->adCount = [
       Ad::LINK => 0,
       Ad::CONTENT => 0,
     ];
@@ -96,13 +113,11 @@ class Adsense {
     $this->ad->load($name, $this->config->get("ardan/adsense::ads.$name"));
 
     // Do not display more ads than Google allows
-    if ( $this->ad_count[$this->ad->type]++ >= $this->ad_limits[$this->ad->type] ) {
-      Log::notice("Adsense limit reached. Ad '{$this->ad->name}' not displayed.");
-      return '';
-    }
+    if ( $this->adCount[$this->ad->type]++ >= $this->adLimits[$this->ad->type] )
+      return "<!-- Adsense limit reached. Ad '{$this->ad->name}' not displayed. -->";
 
     $data = [
-      'ad_client' => $this->ad_client,
+      'ad_client' => $this->adClient,
       'slot' => $this->ad->id,
       'width' => $this->ad->width,
       'height' => $this->ad->height,
@@ -110,7 +125,7 @@ class Adsense {
       'description' => $this->ad->description,
     ];
 
-    return View::make("ardan/adsense::{$this->renderer}", $data);
+    return $this->view->make("ardan/adsense::{$this->renderer}", $data)->render();
 
   } /* function get */
 

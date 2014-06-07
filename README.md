@@ -1,6 +1,7 @@
 # Display Google AdSense Ads
 
-A convenient way to display Google AdSense ads in your Blade templates.
+A convenient way to display Google AdSense ads in your HTML. Just setup your ads,
+then $adsense->get('ad') to return the HTML for the ad.
 
 ## Installation
 
@@ -16,7 +17,7 @@ Edit your `composer.json` file:
 },
 "repositories": [
   {
-    "type": "vcs",
+    "type": "git",
     "url": "https://ardan@bitbucket.org/ardan/adsense.git"
   }
 ]
@@ -44,6 +45,8 @@ return [
   ],
 ];
 ```
+
+Refer to `config.php` for more configuration documentation.
 
 ### Integrate with Laravel
 
@@ -82,4 +85,4 @@ Blade::extend(function ($view, $compiler) {
 ## TODO
 
 * Write tests.
-* Proofread.
+* Extend Blade in AdsenseServiceProvider

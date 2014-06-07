@@ -2,7 +2,7 @@
 
 namespace Ardan\Adsense;
 
-use Ardan\Adsense\Models\Ad;
+use Ardan\Adsense\Ad;
 use Illuminate\Support\ServiceProvider;
 
 class AdsenseServiceProvider extends ServiceProvider {
@@ -12,7 +12,7 @@ class AdsenseServiceProvider extends ServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $defer = false;
+	protected $defer = true;
 
 
 
@@ -85,7 +85,8 @@ class AdsenseServiceProvider extends ServiceProvider {
 
 	    return new Adsense(
 	      $app['config'],
-	      $app['adsense.ad']
+	      $app['adsense.ad'],
+	      $app['view']
 	    );
 
 	 });

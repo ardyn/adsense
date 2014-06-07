@@ -4,8 +4,6 @@ namespace Ardan\Adsense\Exceptions;
 
 use Exception;
 
-class AdsenseException extends Exception {
-
-} /* class AdsenseException */
+abstract class AdsenseException extends Exception { }
 
 /* EOF */
