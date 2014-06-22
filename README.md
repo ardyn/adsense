@@ -13,12 +13,12 @@ Edit your `composer.json` file:
 
 ```json
 "require": {
-  "ardan/adsense": "dev-master"
+  "ardyn/adsense": "dev-master"
 },
 "repositories": [
   {
     "type": "git",
-    "url": "https://ardan@bitbucket.org/ardan/adsense.git"
+    "url": "https://git@github.com/ardyn/adsense.git"
   }
 ]
 ```
@@ -26,17 +26,17 @@ Run `composer update`.
 
 ### Publish Configuration Files
 
-Run `php artisan config:publish ardan/adsense`, then modify the contents of `app/config/packages/ardan/adsense/config.php`.
+Run `php artisan config:publish ardyn/adsense`, then modify the contents of `app/config/packages/ardyn/adsense/config.php`.
 
-* **id** *required* The ad ID
+* **id** *required* The ad ID.
 * **size** *required* Size of ad. Either an array or string.
-* **description** A short description of the ad
-* **type** Either Ad::LINK or Ad::CONTENT. Default is Ad::CONTENT
+* **description** A short description of the ad.
+* **type** Either Ad::LINK or Ad::CONTENT. Default is Ad::CONTENT.
 
 ```php
 return [
   'ads' => [
-    'ad_key' => [
+    'example' => [
       'id' => '123456789',
       'size' => [ 300, 100 ],
       'description' => 'Test Ad',
@@ -53,26 +53,26 @@ Refer to `config.php` for more configuration documentation.
 Add the following to the `providers` array in your `app/config.php` file:
 
 ```php
-'Ardan\Adsense\AdsenseServiceProvider'
+'Ardyn\Adsense\AdsenseServiceProvider'
 ```
 
 And add the alias in `aliases` array:
 
 ```php
-'Adsense' => 'Ardan\Adense\Facades\Adsense'
+'Adsense' => 'Ardyn\Adense\Facades\Adsense'
 ```
 
 ## Usage
 
-To display the HTML for an ad, call `Adsense::get('ad_key');` where `'ad_key'` is the array index of your ad.
+To display the HTML for an ad, call `Adsense::get('example');` where `'example'` is the array index of your ad.
 
 Determine whether ads are displayed by setting the `enabled` configuration value to either a boolean value or
 a closure that returns a boolean value. The closure may include parameters. Pass the arguments
-in `Adsense::get('ad_key', [ /* parameters */ ])`.
+in `Adsense::get('example', [ /* parameters */ ])`.
 
 ## Extending Blade
 
-You may create a blade control structure to display an ad with `@adsense('ad_key')` rather than `{{ Adsense::get('ad_key') }}`.
+You may create a blade control structure to display an ad with `@adsense('example')` rather than `{{ Adsense::get('example') }}`.
 
 Edit your `global.php` file and add the following code.
 

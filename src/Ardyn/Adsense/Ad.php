@@ -1,9 +1,9 @@
 <?php
 
-namespace Ardan\Adsense;
+namespace Ardyn\Adsense;
 
-use Ardan\Adsense\Exceptions\AdNotFoundException;
-use Ardan\Adsense\Exceptions\InvalidAdSizeException;
+use Ardyn\Adsense\Exceptions\AdNotFoundException;
+use Ardyn\Adsense\Exceptions\InvalidAdSizeException;
 
 class Ad {
 
@@ -116,12 +116,10 @@ class Ad {
       throw new AdNotFoundException("Ad '$name' is not configured.");
 
     $ad = array_merge($ad, $this->defaults);
-    list ($width, $height) = $this->parseSize($ad['size']);
 
+    list ($this->width, $this->height) = $this->parseSize($ad['size']);
     $this->name = $name;
     $this->id = $ad['id'];
-    $this->width = $width;
-    $this->height = $height;
     $this->description = $ad['description'];
     $this->type = $ad['type'];
 

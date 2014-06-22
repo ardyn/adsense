@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Adsense\Exceptions;
+namespace Ardyn\Adsense\Exceptions;
 
 class AdNotFoundException extends AdsenseException {
 

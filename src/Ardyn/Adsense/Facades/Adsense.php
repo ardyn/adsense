@@ -1,6 +1,6 @@
 <?php
 
-namespace Ardan\Adsense\Facades;
+namespace Ardyn\Adsense\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

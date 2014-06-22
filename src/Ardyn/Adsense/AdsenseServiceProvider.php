@@ -1,8 +1,8 @@
 <?php
 
-namespace Ardan\Adsense;
+namespace Ardyn\Adsense;
 
-use Ardan\Adsense\Ad;
+use Ardyn\Adsense\Ad;
 use Illuminate\Support\ServiceProvider;
 
 class AdsenseServiceProvider extends ServiceProvider {
@@ -25,7 +25,7 @@ class AdsenseServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 
-	  $this->package('ardan/adsense', 'ardan/adsense');
+	  $this->package('ardyn/adsense', 'ardyn/adsense');
 
 	} /* function boot */
 
@@ -60,8 +60,8 @@ class AdsenseServiceProvider extends ServiceProvider {
 	  $app->bind('adsense.ad', function () use ($app) {
 
 	    return new Ad(
-	      $app['config']->get('ardan/adsense::defaults'),
-	      $app['config']->get('ardan/adsense::delimiter')
+	      $app['config']->get('ardyn/adsense::defaults'),
+	      $app['config']->get('ardyn/adsense::delimiter')
 	    );
 
 	  });

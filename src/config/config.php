@@ -1,6 +1,6 @@
 <?php
 
-use Ardan\Adsense\Ad;
+use Ardyn\Adsense\Ad;
 
 return [
 

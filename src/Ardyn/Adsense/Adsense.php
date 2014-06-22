@@ -1,9 +1,9 @@
 <?php
 
-namespace Ardan\Adsense;
+namespace Ardyn\Adsense;
 
-use Ardan\Adsense\Ad;
-use Illuminate\View\Environment as View;
+use Ardyn\Adsense\Ad;
+use Illuminate\View\Factory as View;
 use Illuminate\Config\Repository as Config;
 
 class Adsense {
@@ -18,7 +18,7 @@ class Adsense {
   /**
    * An Ad
    *
-   * @var \Ardan\Adsense\Ad
+   * @var \Ardyn\Adsense\Ad
    */
   protected $ad;
 
@@ -71,8 +71,8 @@ class Adsense {
    *
    * @access public
    * @param \Illuminate\Config\Repository $config
-   * @param \Ardan\Adsense\Models\Ad $ad
-   * @param \Illuminate\View\Environment $view
+   * @param \Ardyn\Adsense\Models\Ad $ad
+   * @param \Illuminate\View\Factory $view
    * @return void
    */
   public function __construct(
@@ -85,10 +85,10 @@ class Adsense {
     $this->ad = $ad;
     $this->view = $view;
 
-    $this->renderer = $config->get('ardan/adsense::renderer');
-    $this->enabled = $config->get('ardan/adsense::enabled');
-    $this->adClient = "ca-".$config->get('ardan/adsense::ad_client');
-    $this->adLimits = $config->get('ardan/adsense::limits');
+    $this->renderer = $config->get('ardyn/adsense::renderer');
+    $this->enabled = $config->get('ardyn/adsense::enabled');
+    $this->adClient = "ca-".$config->get('ardyn/adsense::ad_client');
+    $this->adLimits = $config->get('ardyn/adsense::limits');
     $this->adCount = [
       Ad::LINK => 0,
       Ad::CONTENT => 0,
@@ -111,7 +111,7 @@ class Adsense {
     if ( ! $this->showAds($arguments) )
       return '';
 
-    $this->ad->load($name, $this->config->get("ardan/adsense::ads.$name"));
+    $this->ad->load($name, $this->config->get("ardyn/adsense::ads.$name"));
 
     // Do not display more ads than Google allows
     if ( $this->adCount[$this->ad->type]++ >= $this->adLimits[$this->ad->type] )
@@ -126,7 +126,7 @@ class Adsense {
       'description' => $this->ad->description,
     ];
 
-    return $this->view->make("ardan/adsense::{$this->renderer}", $data)->render();
+    return $this->view->make("ardyn/adsense::{$this->renderer}", $data)->render();
 
   } /* function get */
 
