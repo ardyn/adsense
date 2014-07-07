@@ -14,13 +14,7 @@ Edit your `composer.json` file:
 ```json
 "require": {
   "ardyn/adsense": "dev-master"
-},
-"repositories": [
-  {
-    "type": "git",
-    "url": "https://git@github.com/ardyn/adsense.git"
-  }
-]
+}
 ```
 Run `composer update`.
 
@@ -59,7 +53,7 @@ Add the following to the `providers` array in your `app/config.php` file:
 And add the alias in `aliases` array:
 
 ```php
-'Adsense' => 'Ardyn\Adense\Facades\Adsense'
+'Adsense' => 'Ardyn\Adsense\Facades\Adsense'
 ```
 
 ## Usage
