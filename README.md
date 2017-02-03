@@ -13,7 +13,7 @@ Edit your `composer.json` file:
 
 ```json
 "require": {
-  "ardyn/adsense": "dev-master"
+  "ardyn/adsense": "v1.0"
 }
 ```
 Run `composer update`.
@@ -84,3 +84,5 @@ Blade::extend(function ($view, $compiler) {
 
 * Write tests.
 * Extend Blade in AdsenseServiceProvider
+* Version Control
+* Drop Laravel

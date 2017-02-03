@@ -1,6 +1,6 @@
 {
     "name": "ardyn/adsense",
-    "description": "A convient way to include Google AdSense ads within your pages.",
+    "description": "A convenient way to include Google AdSense ads within your pages.",
     "keywords": [ "laravel", "adsense", "google ads" ],
     "license": "MIT",
     "authors": [
