@@ -11,7 +11,9 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "vlucas/phpdotenv": "~2.2"
+        "illuminate/support": "~5.4",
+        "illuminate/config":"~5.4",
+        "illuminate/view":"~5.4"
     },
     "autoload": {
         "psr-0": {

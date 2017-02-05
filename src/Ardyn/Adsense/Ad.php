@@ -87,8 +87,7 @@ class Ad {
    *
    * @access public
    * @param array $defaults
-   * @param string $deliminter
-   * @return void
+   * @param string $delimiter
    */
   public function __construct(
     $defaults,
@@ -108,7 +107,7 @@ class Ad {
    * @access public
    * @param string $name
    * @param array $ad
-   * @return void
+   * @throws \Ardyn\Adsense\Exceptions\AdNotFoundException
    */
   public function load($name, $ad) {
 
@@ -132,6 +131,7 @@ class Ad {
    *
    * @access private
    * @param mixed $size
+   * @throws \Ardyn\Adsense\Exceptions\InvalidAdSizeException
    * @return int
    */
   private function parseSize($size) {

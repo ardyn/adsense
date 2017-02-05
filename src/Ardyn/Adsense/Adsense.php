@@ -2,7 +2,6 @@
 
 namespace Ardyn\Adsense;
 
-use Ardyn\Adsense\Ad;
 use Illuminate\View\Factory as View;
 use Illuminate\Config\Repository as Config;
 
@@ -73,7 +72,6 @@ class Adsense {
    * @param \Illuminate\Config\Repository $config
    * @param \Ardyn\Adsense\Models\Ad $ad
    * @param \Illuminate\View\Factory $view
-   * @return void
    */
   public function __construct(
     Config $config,
@@ -85,10 +83,10 @@ class Adsense {
     $this->ad = $ad;
     $this->view = $view;
 
-    $this->renderer = $config->get('ardyn/adsense::renderer');
-    $this->enabled = $config->get('ardyn/adsense::enabled');
-    $this->adClient = "ca-".$config->get('ardyn/adsense::ad_client');
-    $this->adLimits = $config->get('ardyn/adsense::limits');
+    $this->renderer = $config->get('adsense.renderer');
+    $this->enabled = $config->get('adsense.enabled');
+    $this->adClient = "ca-".$config->get('adsense.ad_client');
+    $this->adLimits = $config->get('adsense.limits');
     $this->adCount = [
       Ad::LINK => 0,
       Ad::CONTENT => 0,
@@ -99,7 +97,7 @@ class Adsense {
 
 
   /**
-   * Return code for a Google AdSence ad
+   * Return code for a Google AdSense ad
    *
    * @access public
    * @param string $name
@@ -111,7 +109,7 @@ class Adsense {
     if ( ! $this->showAds($arguments) )
       return '';
 
-    $this->ad->load($name, $this->config->get("ardyn/adsense::ads.$name"));
+    $this->ad->load($name, $this->config->get("adsense.ads.$name"));
 
     // Do not display more ads than Google allows
     if ( $this->adCount[$this->ad->type]++ >= $this->adLimits[$this->ad->type] )
@@ -126,7 +124,7 @@ class Adsense {
       'description' => $this->ad->description,
     ];
 
-    return $this->view->make("ardyn/adsense::{$this->renderer}", $data)->render();
+    return $this->view->make("adsense::{$this->renderer}", $data)->render();
 
   } /* function get */
 

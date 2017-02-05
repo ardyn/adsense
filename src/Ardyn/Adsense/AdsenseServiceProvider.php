@@ -2,7 +2,6 @@
 
 namespace Ardyn\Adsense;
 
-use Ardyn\Adsense\Ad;
 use Illuminate\Support\ServiceProvider;
 
 class AdsenseServiceProvider extends ServiceProvider {
@@ -25,7 +24,11 @@ class AdsenseServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 
-	  $this->package('ardyn/adsense', 'ardyn/adsense');
+        $this->publishes([
+            __DIR__.'/../../config/adsense.php' => config_path('adsense.php'),
+        ]);
+
+        $this->loadViewsFrom(__DIR__.'/../../views', 'adsense');
 
 	} /* function boot */
 
@@ -39,8 +42,8 @@ class AdsenseServiceProvider extends ServiceProvider {
 	 */
 	public function register() {
 
-    $this->registerAdsense();
-    $this->registerAd();
+        $this->registerAdsense();
+        $this->registerAd();
 
 	} /* function register */
 
@@ -60,8 +63,8 @@ class AdsenseServiceProvider extends ServiceProvider {
 	  $app->bind('adsense.ad', function () use ($app) {
 
 	    return new Ad(
-	      $app['config']->get('ardyn/adsense::defaults'),
-	      $app['config']->get('ardyn/adsense::delimiter')
+	      $app['config']->get('adsense.defaults'),
+	      $app['config']->get('adsense.delimiter')
 	    );
 
 	  });
