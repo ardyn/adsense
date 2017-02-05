@@ -1,6 +1,6 @@
 # Display Google AdSense Ads
 
-A convenient way to display Google AdSense ads in your Laravel application. Just setup your ads,
+A convenient way to display Google AdSense ads in your Laravel 5 application. Just setup your ads,
 then $adsense->get('ad') to return the HTML for the ad.
 
 ## Installation
@@ -13,7 +13,7 @@ Edit your `composer.json` file:
 
 ```json
 "require": {
-  "ardyn/adsense": "v2.*"
+  "ardyn/adsense": "~2.0"
 }
 ```
 Run `composer update`.
@@ -42,9 +42,9 @@ return [
 
 Refer to `adsense.php` for more configuration documentation.
 
-### Integrate with Laravel
+### Integrate with Laravel 5
 
-Add the following to the `providers` array in your `app/config.php` file:
+Add the following to the `providers` array in your `config/app.php` file:
 
 ```php
 'Ardyn\Adsense\AdsenseServiceProvider'
@@ -62,8 +62,8 @@ To display the HTML for an ad, call `Adsense::get('example');` where `'example'`
 
 Determine whether ads are displayed by setting the `enabled` configuration value to either a boolean value or
 a closure that returns a boolean value. The closure may include parameters. Pass the arguments
-in `Adsense::get('example', [ /* parameters */ ])`.
+in `Adsense::get('example', [ /* parameters */ ])`. Closures are not recommened as Laravel's config:cache cannot serialize closures correctly.
 
 ## TODO
 
-* Write tests.
+* Write tests
