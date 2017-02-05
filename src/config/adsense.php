@@ -20,6 +20,8 @@ return [
    * view files to override these renderers or to create your own renderers.
    *
    * Available options: 'placeholdit', 'asynchronous', 'synchronous'
+   * 
+   * You may create your own renderer as well. Just create a view and place into resources/views/vendor/adsense
    */
   'renderer' => 'placeholdit',
 

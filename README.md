@@ -1,6 +1,6 @@
 # Display Google AdSense Ads
 
-A convenient way to display Google AdSense ads in your HTML. Just setup your ads,
+A convenient way to display Google AdSense ads in your Laravel 5 application. Just setup your ads,
 then $adsense->get('ad') to return the HTML for the ad.
 
 ## Installation
@@ -13,14 +13,14 @@ Edit your `composer.json` file:
 
 ```json
 "require": {
-  "ardyn/adsense": "v1.0"
+  "ardyn/adsense": "~2.0"
 }
 ```
 Run `composer update`.
 
 ### Publish Configuration Files
 
-Run `php artisan config:publish ardyn/adsense`, then modify the contents of `app/config/packages/ardyn/adsense/config.php`.
+Run `php artisan vendor:publish`, then modify the contents of `/config/adsense.php`.
 
 * **id** *required* The ad ID.
 * **size** *required* Size of ad. Either an array or string.
@@ -40,11 +40,11 @@ return [
 ];
 ```
 
-Refer to `config.php` for more configuration documentation.
+Refer to `adsense.php` for more configuration documentation.
 
-### Integrate with Laravel
+### Integrate with Laravel 5
 
-Add the following to the `providers` array in your `app/config.php` file:
+Add the following to the `providers` array in your `config/app.php` file:
 
 ```php
 'Ardyn\Adsense\AdsenseServiceProvider'
@@ -62,27 +62,8 @@ To display the HTML for an ad, call `Adsense::get('example');` where `'example'`
 
 Determine whether ads are displayed by setting the `enabled` configuration value to either a boolean value or
 a closure that returns a boolean value. The closure may include parameters. Pass the arguments
-in `Adsense::get('example', [ /* parameters */ ])`.
-
-## Extending Blade
-
-You may create a blade control structure to display an ad with `@adsense('example')` rather than `{{ Adsense::get('example') }}`.
-
-Edit your `global.php` file and add the following code.
-
-```php
-Blade::extend(function ($view, $compiler) {
-
-  $pattern = $compiler->createMatcher('adsense');
-
-  return preg_replace($pattern, '<?php echo Adsense::get($2); ?>', $view);
-
-});
-```
+in `Adsense::get('example', [ /* parameters */ ])`. Closures are not recommened as Laravel's config:cache cannot serialize closures correctly.
 
 ## TODO
 
-* Write tests.
-* Extend Blade in AdsenseServiceProvider
-* Version Control
-* Drop Laravel
+* Write tests
